@@ -10,6 +10,7 @@
           p.memoTitile {{ displayTitle(memo.markdown) }}
         .memoListBtn
           button.addMemoBtn(@click="addMemo") メモの追加
+          button.deleteMemoBtn(@click="deleteMemo" v-if="memos.length > 1") 選択中のメモの削除
       .editorWrapper
         textarea.markdown(v-model="memos[selectedIndex].markdown")
         .preview(v-html="preview()")
@@ -25,7 +26,7 @@
     @Prop({}) user: unknown
 
     markdown: string = ''
-    memos = [{ markdown: '' }]
+    memos = [{ markdown: '新しいメモ' }]
     selectedIndex: number = 0
 
     logout(): void {
@@ -49,6 +50,13 @@
 
     displayTitle(text: string): string {
       return text.split(/\n/)[0]
+    }
+
+    deleteMemo() {
+      this.memos.splice(this.selectedIndex, 1)
+      if (this.selectedIndex > 0) {
+        this.selectedIndex -= 1
+      }
     }
 
   }
