@@ -11,6 +11,7 @@
         .memoListBtn
           button.addMemoBtn(@click="addMemo") メモの追加
           button.deleteMemoBtn(@click="deleteMemo" v-if="memos.length > 1") 選択中のメモの削除
+          button.saveMeomoBtn(@click="saveMemos") メモの保存
       .editorWrapper
         textarea.markdown(v-model="memos[selectedIndex].markdown")
         .preview(v-html="preview()")
@@ -23,12 +24,25 @@
 
   @Component
   export default class Editor extends Vue {
-    @Prop({}) user: unknown
+    // Props
+    @Prop({}) user: any
 
+    // Data
     markdown: string = ''
     memos = [{ markdown: '新しいメモ' }]
     selectedIndex: number = 0
 
+    // Life Cycle
+    created() {
+      firebase.database().ref(`memos/${this.user.uid}`).once('value')
+        .then((result) => {
+          if (result.val()) {
+            this.memos = result.val()
+          }
+        })
+    }
+
+    // Methods
     logout(): void {
       firebase.auth().signOut()
     }
@@ -47,16 +61,19 @@
       this.selectedIndex = index
     }
 
-
     displayTitle(text: string): string {
       return text.split(/\n/)[0]
     }
 
-    deleteMemo() {
+    deleteMemo(): void {
       this.memos.splice(this.selectedIndex, 1)
       if (this.selectedIndex > 0) {
         this.selectedIndex -= 1
       }
+    }
+
+    saveMemos(): void {
+      firebase.database().ref(`memos/${this.user.uid}`).set(this.memos)
     }
 
   }
@@ -80,6 +97,7 @@
   .memoList {
     border-bottom: solid 1px #333;
     box-sizing: border-box;
+    font-size: 14px;
     padding: 10px;
     &:nth-of-type(even) {
       background: #ccc;
@@ -109,5 +127,8 @@
   .preview {
     text-align: left;
     width: 48%;
+  }
+  button {
+    margin: 5px;
   }
 </style>
