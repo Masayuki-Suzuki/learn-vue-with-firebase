@@ -29,17 +29,29 @@
 
     // Data
     markdown: string = ''
-    memos = [{ markdown: '新しいメモ' }]
+    memos: {[index: string]: string}[] = [{ markdown: '# 無題のメモ' }]
     selectedIndex: number = 0
 
     // Life Cycle
     created() {
+      console.log(this.user)
       firebase.database().ref(`memos/${this.user.uid}`).once('value')
         .then((result) => {
           if (result.val()) {
             this.memos = result.val()
           }
         })
+    }
+    mounted() {
+      document.onkeydown = (e): boolean | undefined => {
+        if (e.key === 's' && e.metaKey) {
+          this.saveMemos()
+          return false
+        }
+      }
+    }
+    beforeDestroy() {
+      document.onkeydown = null
     }
 
     // Methods

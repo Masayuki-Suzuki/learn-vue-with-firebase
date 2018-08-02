@@ -19,6 +19,7 @@
     "semicolon": [true, "never"],
     "no-console": false,
     "member-access": false,
-    "no-default-export": false
+    "no-default-export": false,
+    "array-type": [true, "array"]
   }
 }
