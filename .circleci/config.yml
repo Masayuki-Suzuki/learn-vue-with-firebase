@@ -40,7 +40,7 @@ jobs:
     #- run: yarn test
 
     # Install Firebase-tools and vue-cli
-    - run: npm i -g firebase-tools @vue/cli
+    - run: yarn add -D firebase-tools @vue/cli
     # Firebase Test
     - run: firebase -V
 
