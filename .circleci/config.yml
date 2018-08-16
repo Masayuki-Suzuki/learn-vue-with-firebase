@@ -43,7 +43,8 @@ jobs:
     - run: yarn build
 
     # Firebase Test
-    - run: firebase -V
+    #- run: firebase -V
       
     # Deploy
-    - run: firebase deploy --token "$FIREBASE_TOKEN"
+    - run:
+        command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
