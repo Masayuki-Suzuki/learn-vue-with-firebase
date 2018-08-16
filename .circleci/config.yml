@@ -15,7 +15,7 @@ jobs:
     # - image: circleci/mongo:3.4.4
     branches:
       only:
-        - a-little-bit-plus
+      - a-little-bit-plus
 
     working_directory: ~/repo
 
@@ -39,14 +39,13 @@ jobs:
     # run tests!
     #- run: yarn test
 
-    # Install Firebase-tools
-    - run: yarn global add firebase-tools
+    # Install Firebase-tools and vue-cli
+    - run: npm i -g firebase-tools @vue/cli
+    # Firebase Test
+    - run: firebase -V
 
     # Build
     - run: yarn build
 
     # Deploy
-    - run: firebase deploy --token "$FIREBASE_TOKEN"
-
-
-
+    #- run: firebase deploy --token "$FIREBASE_TOKEN"
