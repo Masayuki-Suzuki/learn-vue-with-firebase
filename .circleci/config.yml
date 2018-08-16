@@ -19,6 +19,10 @@ jobs:
 
     working_directory: ~/repo
 
+    dependencies:
+      override:
+        - npm i -g firebase-tools @vue/cli
+
     steps:
     - checkout
 
