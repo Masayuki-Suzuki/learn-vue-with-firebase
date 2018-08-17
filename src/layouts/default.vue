@@ -1,6 +1,5 @@
-<template>
-  <div>
-    <router-view/>
-    <p>This is a default layout</p>
-  </div>
+<template lang="pug">
+  main.main
+    img(src="../assets/logo.png")
+    router-view
 </template>

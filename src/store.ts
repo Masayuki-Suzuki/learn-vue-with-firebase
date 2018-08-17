@@ -4,7 +4,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    isLogin: false
+  },
+  mutations: {
+    changeLoginState(state) {
+      state.isLogin = !state.isLogin
+    }
+  },
   actions: {}
 })
