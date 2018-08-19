@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    userData: null
   },
   mutations: {
     changeLoginStateLogin(state) {
@@ -13,6 +14,12 @@ export default new Vuex.Store({
     },
     changeLoginStateLogout(state) {
       state.isLogin = false
+    },
+    setUserData(state, payload) {
+      state.userData = payload
+    },
+    clearUserData(state) {
+      state.userData = null
     }
   },
   actions: {}
