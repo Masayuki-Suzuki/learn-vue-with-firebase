@@ -1,9 +1,13 @@
 <template lang="pug">
   .editor
     h2 エディター画面
-    .editor__wrapper
-      textarea.markdown(v-model="markdown")
-      .preview(v-html="preview()")
+    //.editor__wrapper
+    v-card
+      v-layout(row fill-height justify-space-around)
+        v-flex(xs6)
+          v-textarea.markdown(v-model="markdown" label="markdown" rows="19" box)
+        v-flex(xs6)
+          .preview(v-html="preview()")
 </template>
 
 <script lang="ts">
@@ -26,30 +30,38 @@ export default class Editor extends Vue {
 
 <style lang="scss" scoped>
 .editor {
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   h2 {
     font-size: 2.4rem;
-    margin: 0 0 20px;
+    margin: 0 0 10px;
   }
   &__wrapper {
     display: flex;
     justify-content: space-between;
-    height: 500px;
+    height: 300px;
     margin: 0 auto;
     width: 98%;
   }
 }
-.markdown,
+.v-card {
+  margin: 0 auto;
+  padding: 10px;
+  height: 400px;
+  width: 98%;
+}
+
 .preview {
   font-size: 1.4rem;
   line-height: 1.6;
   text-align: left;
-  width: 48%;
+  padding: 0 10px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 }
 .markdown {
-  border: solid 1px #ccc;
-  border-radius: 5px;
   font-size: 1.4rem;
-  padding: 10px;
+  height: 100%;
+  width: 100%;
 }
 </style>

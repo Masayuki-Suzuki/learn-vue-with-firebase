@@ -10,10 +10,18 @@
           span.white--text Googleアカウントでログイン
         v-btn(v-if="!this.$store.state.isLogin" @click="githubLogin" flat)
           span.white--text Githubアカウントでログイン
-        p(v-if="this.$store.state.isLogin")
-          span.white--text {{ this.$store.state.userData.displayName }}
-        v-btn(v-if="this.$store.state.isLogin" @click="logout" flat)
-          span.white--text ログアウト
+        v-menu(v-if="this.$store.state.isLogin" z-index="10" offset-y)
+          v-avatar(slot="activator" icon dark)
+            img.userImg(:src="this.$store.state.userData.photoURL")
+          v-list.white
+            v-list-tile
+              v-list-tile-avatar
+                img(:src="this.$store.state.userData.photoURL")
+              v-list-tile-content
+                v-list-tile-title {{ this.$store.state.userData.displayName }}
+                v-list-tile-sub-title {{ this.$store.state.userData.email }}
+          v-divider
+          v-btn(@click="logout" flat small) ログアウト
 </template>
 
 <script lang="ts">
@@ -44,5 +52,15 @@ export default class Header extends Vue {
 }
 .link {
   text-decoration: none;
+}
+.menuBtn {
+  height: 34px;
+}
+.logOut {
+  width: 100%;
+}
+.userImg {
+  height: 32px;
+  width: 32px;
 }
 </style>

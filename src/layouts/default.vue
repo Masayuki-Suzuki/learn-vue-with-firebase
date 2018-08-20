@@ -1,7 +1,8 @@
 <template lang="pug">
-  .container
-    Header
-    router-view
+  v-app
+    .container
+      Header
+      router-view
 </template>
 
 <script lang="ts">
@@ -19,7 +20,8 @@ export default class Default extends Vue {}
 
 <style lang="scss" scoped>
 .container {
-  padding: 70px 0 0;
+  background: #f1f1f1;
+  padding: 65px 0 0;
   max-width: 100%;
   width: 100%;
 }
