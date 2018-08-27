@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  #index
     Home(v-if="!this.$store.state.isLogin")
     Editor(v-if="this.$store.state.isLogin")
 </template>
@@ -10,7 +10,7 @@ import Home from '@/components/Home.vue'
 import Editor from '@/components/Editor.vue'
 
 @Component({
-  name: 'home',
+  name: 'index',
   components: {
     Editor,
     Home

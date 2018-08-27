@@ -13,7 +13,7 @@
         v-menu(v-if="this.$store.state.isLogin" z-index="10" offset-y)
           v-avatar(slot="activator" icon dark)
             img.userImg(:src="this.$store.state.userData.photoURL")
-          v-list.white
+          v-list
             v-list-tile
               v-list-tile-avatar
                 img(:src="this.$store.state.userData.photoURL")
@@ -29,9 +29,9 @@ import { Component, Vue } from 'vue-property-decorator'
 import firebase from 'firebase'
 
 @Component({
-  name: 'header'
+  name: 'DefaultHeader'
 })
-export default class Header extends Vue {
+export default class DefaultHeader extends Vue {
   googleLogin() {
     firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
   }
@@ -62,5 +62,8 @@ export default class Header extends Vue {
 .userImg {
   height: 32px;
   width: 32px;
+}
+.v-menu__content {
+  background: #fff;
 }
 </style>
