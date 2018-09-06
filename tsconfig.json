@@ -13,7 +13,12 @@
     "baseUrl": ".",
     "types": [
       "node",
-      "jest"
+      "jest",
+      "src/types"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
     ],
     "paths": {
       "@/*": [
@@ -31,6 +36,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/types/*.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],

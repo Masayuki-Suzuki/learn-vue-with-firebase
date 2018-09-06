@@ -1,6 +1,6 @@
 <template lang="pug">
   header.header
-    v-toolbar.header__toolbar(fixed)
+    v-toolbar.header__toolbar(height="48" fixed)
       v-toolbar-title
         router-link.link(to="/" exact)
           span.white--text.header__title Vue Markdown
@@ -60,8 +60,8 @@ export default class DefaultHeader extends Vue {
   width: 100%;
 }
 .userImg {
-  height: 32px;
-  width: 32px;
+  height: 38px;
+  width: 38px;
 }
 .v-menu__content {
   background: #fff;

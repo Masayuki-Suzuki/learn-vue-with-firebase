@@ -2,7 +2,8 @@
   v-app
     .container
       DefaultHeader
-      router-view
+      transition
+        router-view
 </template>
 
 <script lang="ts">

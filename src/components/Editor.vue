@@ -13,7 +13,7 @@
           v-btn(@click="addMemo" flat) メモの追加
         v-flex
           v-flex(xs6)
-            v-textarea.markdown(v-model="memos[selectedIndex].markdown" label="markdown" rows="19" box)
+            <!--aceEditor(v-model="memos[selectedIndex].markdown" @init="editorInit" lang="markdown" theme="chrome" height="100%" width="50%")-->
           v-flex(xs6)
             .preview(v-html="preview()")
 </template>
@@ -47,7 +47,7 @@ export default class Editor extends Vue {
     this.selectedIndex = index
   }
   preview() {
-    return this.memos[this.selectedIndex].markdown
+    return marked(this.memos[this.selectedIndex].markdown)
   }
 }
 </script>
