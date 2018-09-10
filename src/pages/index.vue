@@ -1,7 +1,7 @@
 <template lang="pug">
   #index
-    Home(v-if="!this.$store.state.isLogin")
-    Editor(v-if="this.$store.state.isLogin")
+    Home(v-if="!this.$store.getters.isLogin")
+    Editor(v-if="this.$store.getters.isLogin")
 </template>
 
 <script lang="ts">

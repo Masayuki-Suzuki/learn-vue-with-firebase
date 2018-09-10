@@ -8,12 +8,12 @@
           v-list.memoList
             template(v-for="(memo, index) in memos")
               v-list-tile(@click="selectMemo(index)" :data-selected="index == selectedIndex")
-                v-list-tile-title {{ displayTitle(memo.markdown)}}
+                v-list-tile-title {{ memo.name }}.md
           v-divider
           v-btn(@click="addMemo" flat) メモの追加
         v-flex
           v-flex(xs6)
-            <!--aceEditor(v-model="memos[selectedIndex].markdown" @init="editorInit" lang="markdown" theme="chrome" height="100%" width="50%")-->
+            ace-editor
           v-flex(xs6)
             .preview(v-html="preview()")
 </template>
@@ -22,32 +22,39 @@
 import { Component, Vue } from 'vue-property-decorator'
 import firebase from 'firebase'
 import marked from 'marked'
+import aceEditor from './AceEditor.vue'
 
-interface Memos {
-  [index: string]: string
-}
+import Memo from '../interfaces/Memo'
 
 @Component({
   name: 'editor',
-  layout: 'default'
+  layout: 'default',
+  components: {
+    aceEditor
+  }
 })
 export default class Editor extends Vue {
-  private memos: Memos[] = [{ markdown: '' }]
-  private selectedIndex: number = 0
+  // private memos: Memos[] = [{ markdown: '' }]
+  // private selectedIndex: number = 0
 
-  displayTitle(text: string): string {
-    return text.split(/\n/)[0]
+  get memos(): Memo[] {
+    return this.$store.getters.getMemos
   }
+  get memo(): Memo {
+    return this.$store.getters.getMemo
+  }
+  get selectedIndex(): number {
+    return this.$store.getters.getSelectedIndex
+  }
+
   addMemo() {
-    this.memos.push({
-      markdown: '無題のメモ'
-    })
+    this.$store.dispatch('createNewMemo')
   }
   selectMemo(index: number) {
-    this.selectedIndex = index
+    this.$store.commit('setSelectedIndex', index)
   }
   preview() {
-    return marked(this.memos[this.selectedIndex].markdown)
+    return marked(this.$store.getters.getMemo.markdown)
   }
 }
 </script>

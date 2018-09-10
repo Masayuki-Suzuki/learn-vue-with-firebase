@@ -6,11 +6,11 @@
           span.white--text.header__title Vue Markdown
       v-spacer
       v-toolbar-items
-        v-btn(v-if="!this.$store.state.isLogin" @click="googleLogin" flat)
+        v-btn(v-if="!this.$store.getters.isLogin" @click="googleLogin" flat)
           span.white--text Googleアカウントでログイン
-        v-btn(v-if="!this.$store.state.isLogin" @click="githubLogin" flat)
+        v-btn(v-if="!this.$store.getters.isLogin" @click="githubLogin" flat)
           span.white--text Githubアカウントでログイン
-        v-menu(v-if="this.$store.state.isLogin" z-index="10" offset-y)
+        v-menu(v-if="this.$store.getters.isLogin" z-index="10" offset-y)
           v-avatar(slot="activator" icon dark)
             img.userImg(:src="this.$store.state.userData.photoURL")
           v-list
